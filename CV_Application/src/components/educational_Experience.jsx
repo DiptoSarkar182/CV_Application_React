@@ -11,6 +11,7 @@ export default function Educational_Experience({
     const [titleOfStudy, setTitleOfStudy] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+    const [showEditButton, setShowEditButton] = useState(false);
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -18,16 +19,26 @@ export default function Educational_Experience({
         sendTitleOfStudy(titleOfStudy);
         sendStartDate(startDate);
         sendEndDate(endDate);
-    }
+        setShowEditButton(!showEditButton);
+    }   
 
     return(
-        <div>
+        showEditButton ? (
+            <div className="setShowEditButton">
+                <h2>Edit Education Info</h2>
+                <button 
+                onClick={() => setShowEditButton(!showEditButton)}
+                >Edit</button>
+            </div>
+            ) :
+        (<div className="takeInfo">
             <form onSubmit={handleFormSubmit}>
                 <h2>Education Info</h2>
                 
-                <label>
+                <label className="label">
                     School Name: {' '}
                     <input 
+                        className="inputArea"
                         value={schoolName}
                         onChange={(e) => {
                             setSchoolName(e.target.value);
@@ -35,31 +46,31 @@ export default function Educational_Experience({
                     </input>
                 </label>
 
-                <label>
+                <label className="label">
                     Title Of Study: {' '}
-                    <input value={titleOfStudy} 
+                    <input className="inputArea" value={titleOfStudy} 
                     onChange={(e) => {
                         setTitleOfStudy(e.target.value);
                     }}></input>
                 </label>
 
-                <label>
+                <label className="label">
                     Start Date: {' '}
-                    <input type="date" value={startDate}
+                    <input className="inputArea" type="date" value={startDate}
                     onChange={(e)=>{
                         setStartDate(e.target.value);
                     }}></input>
                 </label>
 
-                <label>
+                <label className="label">
                     End Date: {' '}
-                    <input type="date" value={endDate}
+                    <input className="inputArea" type="date" value={endDate}
                     onChange={(e)=>{
                         setEndDate(e.target.value);
                     }}></input>
                 </label>
                 <button type="submit">Submit</button>
                 </form>
-        </div>
+        </div>)
     );
 }

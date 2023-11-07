@@ -1,5 +1,6 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
+import '../styles/index.css'
 
 export default function General_Information({
     sendFirstName,
@@ -11,7 +12,7 @@ export default function General_Information({
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const fullName = firstName + ' ' + lastName;
+    const [showEditButton, setShowEditButton] = useState(false);
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -19,15 +20,24 @@ export default function General_Information({
         sendLastName(lastName);
         sendEmail(email);
         sendPhoneNumber(phoneNumber);
+        setShowEditButton(!showEditButton);
     }
 
     return (
-        <div>
+       showEditButton ? (
+        <div className="setShowEditButton">
+            <h2>Edit Contact Info</h2>
+            <button 
+            onClick={() => setShowEditButton(!showEditButton)}
+            >Edit</button>
+        </div>
+       ) : (<div className="takeInfo">
             <form onSubmit={handleFormSubmit}>
                 <h2>Contact Info</h2>
-                <label>
+                <label className="label">
                     First Name: {' '}
                     <input
+                        className="inputArea"
                         value={firstName}
                         onChange={(e) => {
                         setFirstName(e.target.value);
@@ -35,9 +45,10 @@ export default function General_Information({
                     ></input>
                 </label>
 
-                <label>
+                <label className="label">
                     Last Name: {' '}
                     <input
+                        className="inputArea"
                         value={lastName}
                         onChange={(e) =>{ 
                         setLastName(e.target.value);
@@ -45,9 +56,10 @@ export default function General_Information({
                     ></input>
                 </label>
 
-                <label>
+                <label className="label">
                     Email: {' '}
                     <input
+                        className="inputArea"
                         value={email}
                         onChange={(e) => {
                         setEmail(e.target.value);
@@ -55,18 +67,19 @@ export default function General_Information({
                     ></input>
                 </label>
 
-                <label>
+                <label className="label">
                     Phone Number: {' '}
                     <input
+                        className="inputArea"
                         value={phoneNumber}
                         onChange={(e) => {
                         setPhoneNumber(e.target.value);
                         }}
                     ></input>
                 </label>
-                <button type='submit' >Submit</button>
+                <button type='submit'>Submit</button>
             </form>
-        </div>
+        </div>)
         
     );
 }

@@ -1,0 +1,25 @@
+.takeInfo{
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 250px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+}
+.setShowEditButton{
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 250px;
+    height: 100px; 
+}
+.label {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputArea{
+    width: 200px;
+    height: 15px;
+}
